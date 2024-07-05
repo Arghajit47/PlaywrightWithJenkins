@@ -1,0 +1,11 @@
+{
+  "firstname": "tester",
+  "lastname": "GPT",
+  "totalprice": 4000,
+  "depositpaid": true,
+  "bookingdates": {
+    "checkin": "2023-02-23",
+    "checkout": "2024-10-23"
+  },
+  "additionalneeds": "Breakfast & Wifi"
+}
