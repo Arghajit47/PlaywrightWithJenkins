@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        PLAYWRIGHT_VERSION = '1.22.2' // Specify your Playwright version here
+        PLAYWRIGHT_VERSION = '1.43.0' // Specify your Playwright version here
     }
     stages {
         stage('Install Dependencies') {
