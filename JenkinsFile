@@ -38,7 +38,7 @@ pipeline {
                 echo 'Run Playwright tests'
                 script {
                     // Ensure Playwright browsers are installed
-                    sh 'npx playwright install'
+                    // sh 'npx playwright install'
 
                     // Run Playwright tests
                     sh 'npm run test:NopCommerce'
