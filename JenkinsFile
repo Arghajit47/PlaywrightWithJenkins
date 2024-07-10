@@ -1,70 +1,36 @@
 pipeline {
-    agent any
-    environment {
-        PLAYWRIGHT_VERSION = '1.43.0' // Specify your Playwright version here
+  agent { 
+    docker { 
+      image 'mcr.microsoft.com/playwright:v1.17.2-focal'
+    } 
+  }
+  stages {
+    stage('install playwright') {
+      steps {
+        sh '''
+          npm i -D @playwright/test
+          npx playwright install
+        '''
+      }
     }
-    stages {
-        stage('Install Dependencies') {
-            steps {
-                echo 'Installing Code Dependencies'
-                // script {
-                    
-                    // Install Node.js and npm if they are not already installed
-                    // sh 'curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -'
-                    // sh 'sudo apt-get install -y nodejs'
-
-                    // // Install Playwright and other dependencies
-                    // sh 'npm install -g playwright@$PLAYWRIGHT_VERSION'
-                // }
-            }
-        }
-        stage('Static Analysis') {
-            steps {
-                echo 'Run the static analysis to the code'
-            }
-        }
-        stage('Compile') {
-            steps {
-                echo 'Compile the source code'
-            }
-        }
-        stage('Security Check') {
-            steps {
-                echo 'Run the security check against the application'
-            }
-        }
-        stage('Run Playwright Tests') {
-            steps {
-                echo 'Run Playwright tests'
-                script {
-                    // Ensure Playwright browsers are installed
-                    // sh 'npx playwright install'
-
-                    // Run Playwright tests
-                    sh 'npm run test:NopCommerce'
-                }
-            }
-        }
-        stage('Run Integration Tests') {
-            steps {
-                echo 'Run only crucial integration tests from the source code'
-            }
-        }
-        stage('Publish Artifacts') {
-            steps {
-                echo 'Save the assemblies generated from the compilation'
-                // Archive the Playwright report
-                archiveArtifacts artifacts: 'playwright-report/**', allowEmptyArchive: true
-            }
-        }
+    stage('help') {
+      steps {
+        sh 'npx playwright test --help'
+      }
     }
-    post {
-        always {
-            script {
-                // Retention logic (if needed, you can implement custom logic here)
-                echo 'Artifacts archived and available for download.'
-            }
+    stage('test') {
+      steps {
+        sh '''
+          npx playwright test --list
+          npx playwright test tests/NopCommerce
+        '''
+      }
+      post {
+        success {
+          archiveArtifacts(artifacts: 'homepage-*.png', followSymlinks: false)
+          sh 'rm -rf *.png'
         }
+      }
     }
+  }
 }
-
