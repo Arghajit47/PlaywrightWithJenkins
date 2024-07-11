@@ -2,9 +2,13 @@ pipeline {
     agent any
 
     environment {
-        PLAYWRIGHT_INSTALL_PATH = '/usr/local/lib/node_modules/playwright'
+        PATH = "/usr/local/bin:$PATH"
+        NPM_CONFIG_PREFIX = "/usr/local" // Ensure npm global packages path is correct
     }
-    tools {nodejs "node"}
+
+    tools {
+        nodejs "node" // Ensure this matches the NodeJS installation name configured in Jenkins
+    }
 
     stages {
         stage('install playwright') {
@@ -17,11 +21,7 @@ pipeline {
                 }
             }
         }
-        stage('help') {
-            steps {
-                sh 'npx playwright test --help'
-            }
-        }
+
         stage('test') {
             steps {
                 sh 'npx playwright test tests/NopCommerce'
