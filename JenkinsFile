@@ -1,8 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:14-alpine'
-        }
+    agent any {
     }
 
     environment {
@@ -14,22 +11,22 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        npm install -g @playwright/test
-                        npx playwright install
+                        /usr/local/bin/npm install -g @playwright/test
+                        /usr/local/bin/npx playwright install
                     '''
                 }
             }
         }
         stage('help') {
             steps {
-                sh 'npx playwright test --help'
+                sh '/usr/local/bin/npx playwright test --help'
             }
         }
         stage('test') {
             steps {
                 sh '''
-                    npx playwright test --list
-                    npx playwright test tests/NopCommerce
+                    /usr/local/bin/npx playwright test --list
+                    /usr/local/bin/npx playwright test tests/NopCommerce
                 '''
             }
             post {
