@@ -1,6 +1,5 @@
 pipeline {
-    agent any {
-    }
+    agent any
 
     environment {
         PLAYWRIGHT_INSTALL_PATH = '/usr/local/lib/node_modules/playwright'
