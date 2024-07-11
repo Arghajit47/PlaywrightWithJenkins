@@ -1,10 +1,9 @@
 pipeline {
     tools {
-        nodejs "node" 
-    }
-    tools {
+        nodejs "node"
         docker "docker" 
     }
+    
   agent { 
     docker { 
       image 'mcr.microsoft.com/playwright:v1.17.2-focal'
