@@ -1,16 +1,18 @@
 pipeline {
-  agent { 
-    docker { 
-      image 'docker pull mcr.microsoft.com/playwright:v1.45.1-jammy'
-    } 
+  agent any
+
+  environment {
+    PLAYWRIGHT_INSTALL_PATH = '/usr/local/lib/node_modules/playwright'
   }
   stages {
     stage('install playwright') {
       steps {
-        sh '''
-          npm i -D @playwright/test
-          npx playwright install
-        '''
+        script {
+            sh '''
+                npm install -g @playwright/test
+                npx playwright install
+            '''
+        }
       }
     }
     stage('help') {
