@@ -1,11 +1,6 @@
 pipeline {
     agent any
 
-    environment {
-        PATH = "/usr/local/bin:$PATH"
-        NPM_CONFIG_PREFIX = "/usr/local" // Ensure npm global packages path is correct
-    }
-
     tools {
         nodejs "node" // Ensure this matches the NodeJS installation name configured in Jenkins
     }
