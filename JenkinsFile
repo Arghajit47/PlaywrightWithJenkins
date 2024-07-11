@@ -1,32 +1,41 @@
 pipeline {
-    agent any
-
     tools {
-        nodejs "node" // Ensure this matches the NodeJS installation name configured in Jenkins
+        nodejs "node" 
     }
-
-    stages {
-        stage('install playwright') {
-            steps {
-                script {
-                    sh '''
-                        npm install -g @playwright/test
-                        npx playwright install
-                    '''
-                }
-            }
-        }
-
-        stage('test') {
-            steps {
-                sh 'npx playwright test tests/NopCommerce'
-            }
-            post {
-                success {
-                    archiveArtifacts(artifacts: 'homepage-*.png', followSymlinks: false)
-                    sh 'rm -rf *.png'
-                }
-            }
-        }
+    tools {
+        docker "docker" 
     }
+  agent { 
+    docker { 
+      image 'mcr.microsoft.com/playwright:v1.17.2-focal'
+    } 
+  }
+  stages {
+    stage('install playwright') {
+      steps {
+        sh '''
+          npm i -D @playwright/test
+          npx playwright install
+        '''
+      }
+    }
+    stage('help') {
+      steps {
+        sh 'npx playwright test --help'
+      }
+    }
+    stage('test') {
+      steps {
+        sh '''
+          npx playwright test
+        '''
+      }
+      post {
+        success {
+          archiveArtifacts(artifacts: 'homepage-*.png', followSymlinks: false)
+          sh 'rm -rf *.png'
+        }
+      }
+    }
+  }
 }
