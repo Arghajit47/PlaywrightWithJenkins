@@ -1,38 +1,43 @@
 pipeline {
-  agent any
+    agent {
+        docker {
+            image 'node:14-alpine'
+        }
+    }
 
-  environment {
-    PLAYWRIGHT_INSTALL_PATH = '/usr/local/lib/node_modules/playwright'
-  }
-  stages {
-    stage('install playwright') {
-      steps {
-        script {
-            sh '''
-                npm install -g @playwright/test
-                npx playwright install
-            '''
+    environment {
+        PLAYWRIGHT_INSTALL_PATH = '/usr/local/lib/node_modules/playwright'
+    }
+
+    stages {
+        stage('install playwright') {
+            steps {
+                script {
+                    sh '''
+                        npm install -g @playwright/test
+                        npx playwright install
+                    '''
+                }
+            }
         }
-      }
-    }
-    stage('help') {
-      steps {
-        sh 'npx playwright test --help'
-      }
-    }
-    stage('test') {
-      steps {
-        sh '''
-          npx playwright test --list
-          npx playwright test tests/NopCommerce
-        '''
-      }
-      post {
-        success {
-          archiveArtifacts(artifacts: 'homepage-*.png', followSymlinks: false)
-          sh 'rm -rf *.png'
+        stage('help') {
+            steps {
+                sh 'npx playwright test --help'
+            }
         }
-      }
+        stage('test') {
+            steps {
+                sh '''
+                    npx playwright test --list
+                    npx playwright test tests/NopCommerce
+                '''
+            }
+            post {
+                success {
+                    archiveArtifacts(artifacts: 'homepage-*.png', followSymlinks: false)
+                    sh 'rm -rf *.png'
+                }
+            }
+        }
     }
-  }
 }
