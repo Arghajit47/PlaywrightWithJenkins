@@ -4,28 +4,29 @@ pipeline {
     environment {
         PLAYWRIGHT_INSTALL_PATH = '/usr/local/lib/node_modules/playwright'
     }
+    tools {nodejs "node"}
 
     stages {
         stage('install playwright') {
             steps {
                 script {
                     sh '''
-                        /usr/local/bin/npm install -g @playwright/test
-                        /usr/local/bin/npx playwright install
+                        npm install -g @playwright/test
+                        npx playwright install
                     '''
                 }
             }
         }
         stage('help') {
             steps {
-                sh '/usr/local/bin/npx playwright test --help'
+                sh 'npx playwright test --help'
             }
         }
         stage('test') {
             steps {
                 sh '''
-                    /usr/local/bin/npx playwright test --list
-                    /usr/local/bin/npx playwright test tests/NopCommerce
+                    npx playwright test --list
+                    npx playwright test tests/NopCommerce
                 '''
             }
             post {
