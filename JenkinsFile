@@ -18,7 +18,12 @@ pipeline {
           echo "Generating Reports! Yup all the test cases are executed."
         '''
       }
-      
+      post {
+        always {
+            // Uploading artifacts
+            archiveArtifacts artifacts: 'playwright-report', allowEmptyArchive: true
+        }
+    }
     }
   }
 }
