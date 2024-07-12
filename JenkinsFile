@@ -5,21 +5,16 @@ pipeline {
         nodejs "node" // Ensure this matches the NodeJS installation name configured in Jenkins
     }
 
-    stages {
-        stage('install playwright') {
-            steps {
-                script {
-                    sh '''
-                        npm install -g @playwright/test
-                        npx playwright install
-                    '''
-                }
-            }
-        }
+    
 
         stage('test') {
             steps {
-                sh 'npx playwright test tests/NopCommerce'
+                script {
+                    sh '''
+                        chmod +x command.sh
+                        ./command.sh
+                    '''
+                }
             }
             post {
                 success {
@@ -28,5 +23,5 @@ pipeline {
                 }
             }
         }
-    }
+    
 }
