@@ -18,14 +18,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Install Playwright
-        run: npx install playwright
-
-      - name: Install Playwright dependencies
-        run: npx playwright install-deps
-
       - name: Run tests
-        run: npx playwright test tests/NopCommerce --project=chromium
+        run: npm run test/NopCommerce
 
       - name: Archive test results
         uses: actions/upload-artifact@v2
