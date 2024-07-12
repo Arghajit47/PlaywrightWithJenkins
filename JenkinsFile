@@ -18,12 +18,7 @@ pipeline {
           echo "Generating Reports! Yup all the test cases are executed."
         '''
       }
-      post {
-        success {
-          archiveArtifacts(artifacts: 'homepage-*.png', followSymlinks: false)
-          sh 'rm -rf *.png'
-        }
-      }
+      
     }
   }
 }
