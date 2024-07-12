@@ -25,3 +25,35 @@ pipeline {
         }
     
 }
+
+pipeline {
+  agent any
+  stages {
+    stage('install playwright and running tests') {
+      steps {
+        sh '''
+            chmod +x command.sh
+            ./command.sh
+        '''
+      }
+    }
+    stage('help') {
+      steps {
+        sh 'npx playwright test --help'
+      }
+    }
+    stage('test') {
+      steps {
+        sh '''
+          echo "Hello"
+        '''
+      }
+      post {
+        success {
+          archiveArtifacts(artifacts: 'homepage-*.png', followSymlinks: false)
+          sh 'rm -rf *.png'
+        }
+      }
+    }
+  }
+}
