@@ -10,17 +10,9 @@ test.describe("Testing Homepage", async () => {
   });
   test("Checking the title of the page", async () => {
     await Home.verifyHomePageTitle("nopCommerce demo store");
-    await page.screenshot({
-      path: "homepage-" + browserName + ".png",
-      fullPage: true,
-    });
   });
   test("Checking all the elements of the Home Page", async () => {
     await Home.verifyHomePage();
-    await page.screenshot({
-      path: "homepage-" + browserName + ".png",
-      fullPage: true,
-    });
   });
   test("Testing for broken links if available", async ({ page }) => {
     test.setTimeout(1500000);
@@ -59,10 +51,6 @@ test.describe("Testing Homepage", async () => {
         console.error(`Error with link: ${href} - Message: ${error.message}`);
       }
     }
-    await page.screenshot({
-      path: "homepage-" + browserName + ".png",
-      fullPage: true,
-    });
   });
 
   test("Check out all the featured items in Store Home Page", async ({
@@ -72,10 +60,6 @@ test.describe("Testing Homepage", async () => {
     for (var i = 1; i <= items.length; i++) {
       console.log(await page.locator(`(//h2//a)[${i}]`).innerText());
     }
-    await page.screenshot({
-      path: "homepage-" + browserName + ".png",
-      fullPage: true,
-    });
   });
 
   test("Login and register user if needed", async () => {
@@ -103,10 +87,6 @@ test.describe("Testing Homepage", async () => {
       await Home.loginToApplication(email, password);
       await Home.verifyHomePage("After Login");
     }
-    await page.screenshot({
-      path: "homepage-" + browserName + ".png",
-      fullPage: true,
-    });
   });
   test("Checking All Navber elements", async ({ page }) => {
     const navbarItems = await page.$$(".header-menu > .notmobile > li > a");
@@ -129,9 +109,5 @@ test.describe("Testing Homepage", async () => {
       );
       console.log(subMenus.toLocaleString());
     }
-    await page.screenshot({
-      path: "homepage-" + browserName + ".png",
-      fullPage: true,
-    });
   });
 });

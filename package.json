@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "playwright test tests",
-    "test:NopCommerce": "playwright test tests/NopCommerce"
+    "test:NopCommerce": "playwright test homePage.test.js"
   },
   "keywords": [],
   "author": "",

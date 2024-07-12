@@ -33,10 +33,6 @@ test.describe("Checking all the Computers Option related functionalities", async
       await Home.clickOnLoginOption();
       await Home.loginToApplication(email, password);
       await Home.verifyHomePage("After Login");
-      await page.screenshot({
-        path: "homepage-" + browserName + ".png",
-        fullPage: true,
-      });
     }
   });
   test("Visit Desktop Page and Order an Desktop", async ({ page }) => {
@@ -52,29 +48,17 @@ test.describe("Checking all the Computers Option related functionalities", async
       config.OS,
       config.Software
     );
-    await page.screenshot({
-      path: "homepage-" + browserName + ".png",
-      fullPage: true,
-    });
   });
   test("Visit Notebook Page and Order an Notebook", async ({ page }) => {
     test.slow();
     Computer = new ComputersPage(page);
     await Computer.visitNotebooksPage();
     await Computer.addNotebooksIntoCart(config.Notebook);
-    await page.screenshot({
-      path: "homepage-" + browserName + ".png",
-      fullPage: true,
-    });
   });
   test("Visit Software Page and Order an Software", async ({ page }) => {
     test.slow();
     Computer = new ComputersPage(page);
     await Computer.visitSoftwaresPage();
     await Computer.addSoftwareIntoCart(config.software);
-    await page.screenshot({
-      path: "homepage-" + browserName + ".png",
-      fullPage: true,
-    });
   });
 });
