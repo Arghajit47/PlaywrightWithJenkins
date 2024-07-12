@@ -1,33 +1,11 @@
-pipeline {
-    agent any
 
-    tools {
-        nodejs "node" // Ensure this matches the NodeJS installation name configured in Jenkins
-    }
 
-    
-
-        stage('test') {
-            steps {
-                script {
-                    sh '''
-                        chmod +x command.sh
-                        ./command.sh
-                    '''
-                }
-            }
-            post {
-                success {
-                    archiveArtifacts(artifacts: 'homepage-*.png', followSymlinks: false)
-                    sh 'rm -rf *.png'
-                }
-            }
-        }
-    
-}
 
 pipeline {
   agent any
+    tools {
+        nodejs "node" // Ensure this matches the NodeJS installation name configured in Jenkins
+    }
   stages {
     stage('install playwright and running tests') {
       steps {
