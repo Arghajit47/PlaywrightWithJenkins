@@ -1,13 +1,10 @@
-
-
-
 pipeline {
   agent any
     tools {
         nodejs "node" // Ensure this matches the NodeJS installation name configured in Jenkins
     }
   stages {
-    stage('install playwright and running tests') {
+    stage('Install playwright and running tests') {
       steps {
         sh '''
             chmod +x command.sh
@@ -15,15 +12,10 @@ pipeline {
         '''
       }
     }
-    stage('help') {
-      steps {
-        sh 'npx playwright test --help'
-      }
-    }
-    stage('test') {
+    stage('Reporting') {
       steps {
         sh '''
-          echo "Hello"
+          echo "Generating Reports! Yup all the test cases are executed."
         '''
       }
       post {
