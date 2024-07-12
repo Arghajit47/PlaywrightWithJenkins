@@ -19,7 +19,7 @@ jobs:
         run: npm install
 
       - name: Run tests
-        run: npm run test/NopCommerce
+        run: npm run test:NopCommerce
 
       - name: Archive test results
         uses: actions/upload-artifact@v2
