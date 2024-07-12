@@ -36,15 +36,7 @@ test.describe("Testing Homepage", async () => {
     for (const link of validLinks) {
       const href = link.startsWith("/") ? `${baseURL}${link}` : link;
       try {
-        const response = await fetch(href, {
-          method: "GET",
-          headers: {
-            "User-Agent":
-              "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
-          },
-          timeout: 10000, // Set a timeout for the request
-        });
-
+        const response = await fetch(href);
         expect(response.status).toBeLessThan(400);
         console.log(`Valid link: ${href} - Status: ${response.status}`);
       } catch (error) {
