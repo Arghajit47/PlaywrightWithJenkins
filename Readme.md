@@ -29,10 +29,10 @@
 4. Go to Dashboard > New Item > Pipeline > <Name_Pipeline> > Save
 5. Now in the config file configure the following these steps:
 
-    I. [Step 1]("img/Step1.png")
-    II. [Step 2]("img/Step2.png")
-    III. [Step 3]("img/Step3.png")
-    IV. [Step 4]("img/Step4.png")
+    I. ![Step 1](img/Step1.png)
+    II. ![Step 2](img/Step2.png)
+    III. ![Step 3](img/Step3.png)
+    IV. ![Step 4](img/Step4.png)
     V. Apply and Save.
 
 6. Now Manually Hit the Build Now button and Sit back & Relax.
