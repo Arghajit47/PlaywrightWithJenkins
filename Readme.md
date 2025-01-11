@@ -1,12 +1,27 @@
-### 1. To install playwright we need node to be installed.
+# Playwright Automation testing in Jenkins CI/CD
 
-### 2. Then we can do `npm init playwright<version>` to install playwright of specific version. If version is not provided then it will install latest version.
+## Steps to Set Up Playwright
 
-### 3. This is a project of playwright with js, so at the time of installation I have selected JavaScript option.
+1. **Install Node.js**: Ensure that Node.js is installed on your system, as Playwright depends on it.
 
-### `npx playwright test <testFileName> --headed`
+2. **Initialize Playwright**: Use the following command to install Playwright:
 
-### How to setup Playwright Pipeline with Jenkins
+   ```bash
+   npm init playwright@<version>
+   ```
+   Replace `<version>` with the desired version. If omitted, the latest version will be installed.
+
+3. **Project Configuration**: During the setup, select the "JavaScript" option as this project uses Playwright with JavaScript.
+
+4. **Run Tests**: Execute the following command to run Playwright tests in headed mode:
+
+   ```bash
+   npx playwright test <testFileName> --headed
+   ```
+   Replace `<testFileName>` with the name of the test file you wish to execute.
+
+
+## How to setup Playwright Pipeline with Jenkins
 
 1. First, run jenkins in your local or, in as a docker image. It by default opens in <a href="http://localhost:8080">localhost:8080</a>.
 2. Go to Manage Jenkins > Plugins > Available Plugins and install NodeJS Plugin
@@ -14,10 +29,10 @@
 4. Go to Dashboard > New Item > Pipeline > <Name_Pipeline> > Save
 5. Now in the config file configure the following these steps:
 
-    I. <img src= "img/Step1.png">
-    II. <img src= "img/Step2.png">
-    III. <img src= "img/Step3.png">
-    IV. <img src= "img/Step4.png">
+    I. [Step 1]("img/Step1.png")
+    II. [Step 2]("img/Step2.png")
+    III. [Step 3]("img/Step3.png")
+    IV. [Step 4]("img/Step4.png")
     V. Apply and Save.
 
 6. Now Manually Hit the Build Now button and Sit back & Relax.
